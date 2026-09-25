@@ -14,3 +14,7 @@ SvelteKit + Svelte 5 (runes only) + TypeScript. Package manager: pnpm.
 - Features live in `src/lib/features/<feature>/`; routes stay thin.
 - Comments only for a non-obvious "why".
 - Run `pnpm check`, `pnpm lint` and `pnpm test` before calling work done.
+
+## Testing
+
+- A test should break when the behaviour breaks, not when unrelated data changes: don't rely on the order or contents of static data unless that is what's being tested.

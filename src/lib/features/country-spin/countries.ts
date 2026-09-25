@@ -1,3 +1,5 @@
+import { pickRandom } from './random';
+
 export type Dish = {
 	name: string;
 	description: string;
@@ -158,3 +160,11 @@ export const countries: Country[] = [
 		]
 	}
 ];
+
+export function findCountry(code: string): Country | undefined {
+	return countries.find((country) => country.code === code.toUpperCase());
+}
+
+export function pickCountry(excludeCode?: string): Country {
+	return pickRandom(countries.filter((country) => country.code !== excludeCode));
+}
