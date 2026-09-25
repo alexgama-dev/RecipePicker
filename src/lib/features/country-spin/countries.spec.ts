@@ -1,5 +1,13 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
-import { countries, findCountry, pickCountry } from './countries';
+import { describe, expect, it } from 'vitest';
+import { continents, countries, findCountry, pickCountries } from './countries';
+
+describe('countries data', () => {
+	it.each(continents)('%s has enough countries for a hand of 3', (continent) => {
+		expect(
+			countries.filter((country) => country.continent === continent).length
+		).toBeGreaterThanOrEqual(3);
+	});
+});
 
 describe('findCountry', () => {
 	it('finds a country by lowercase code', () => {
@@ -11,12 +19,10 @@ describe('findCountry', () => {
 	});
 });
 
-describe('pickCountry', () => {
-	afterEach(() => vi.restoreAllMocks());
-
-	it('never picks the excluded country', () => {
-		vi.spyOn(Math, 'random').mockReturnValue(0);
-		const first = countries[0].code;
-		expect(pickCountry(first).code).not.toBe(first);
+describe('pickCountries', () => {
+	it.each(continents)('picks 3 different countries from %s', (continent) => {
+		const picked = pickCountries(continent, 3);
+		expect(new Set(picked.map((country) => country.code)).size).toBe(3);
+		expect(picked.every((country) => country.continent === continent)).toBe(true);
 	});
 });

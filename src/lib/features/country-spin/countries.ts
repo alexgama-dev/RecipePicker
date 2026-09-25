@@ -1,4 +1,15 @@
-import { pickRandom } from './random';
+import { pickRandom, shuffle } from './random';
+
+export const continents = [
+	'Africa',
+	'Asia',
+	'Europe',
+	'North America',
+	'South America',
+	'Oceania'
+] as const;
+
+export type Continent = (typeof continents)[number];
 
 export type Dish = {
 	name: string;
@@ -8,6 +19,7 @@ export type Dish = {
 export type Country = {
 	code: string; // ISO 3166-1 alpha-2, e.g. "JP"
 	name: string;
+	continent: Continent;
 	dishes: Dish[];
 };
 
@@ -15,6 +27,7 @@ export const countries: Country[] = [
 	{
 		code: 'JP',
 		name: 'Japan',
+		continent: 'Asia',
 		dishes: [
 			{
 				name: 'Ramen',
@@ -33,6 +46,7 @@ export const countries: Country[] = [
 	{
 		code: 'MX',
 		name: 'Mexico',
+		continent: 'North America',
 		dishes: [
 			{
 				name: 'Tacos al Pastor',
@@ -51,6 +65,7 @@ export const countries: Country[] = [
 	{
 		code: 'IT',
 		name: 'Italy',
+		continent: 'Europe',
 		dishes: [
 			{ name: 'Carbonara', description: 'Pasta with egg, pecorino, guanciale and black pepper.' },
 			{ name: 'Risotto alla Milanese', description: 'Creamy saffron risotto from Milan.' },
@@ -60,6 +75,7 @@ export const countries: Country[] = [
 	{
 		code: 'IN',
 		name: 'India',
+		continent: 'Asia',
 		dishes: [
 			{ name: 'Butter Chicken', description: 'Tandoori chicken in a mild, creamy tomato sauce.' },
 			{
@@ -72,6 +88,7 @@ export const countries: Country[] = [
 	{
 		code: 'TH',
 		name: 'Thailand',
+		continent: 'Asia',
 		dishes: [
 			{
 				name: 'Pad Thai',
@@ -90,6 +107,7 @@ export const countries: Country[] = [
 	{
 		code: 'FR',
 		name: 'France',
+		continent: 'Europe',
 		dishes: [
 			{
 				name: 'Coq au Vin',
@@ -108,6 +126,7 @@ export const countries: Country[] = [
 	{
 		code: 'MA',
 		name: 'Morocco',
+		continent: 'Africa',
 		dishes: [
 			{
 				name: 'Tagine',
@@ -123,6 +142,7 @@ export const countries: Country[] = [
 	{
 		code: 'PE',
 		name: 'Peru',
+		continent: 'South America',
 		dishes: [
 			{
 				name: 'Ceviche',
@@ -138,6 +158,7 @@ export const countries: Country[] = [
 	{
 		code: 'KR',
 		name: 'South Korea',
+		continent: 'Asia',
 		dishes: [
 			{ name: 'Bibimbap', description: 'Rice bowl with vegetables, beef, egg and gochujang.' },
 			{ name: 'Kimchi Jjigae', description: 'Spicy stew made with aged kimchi, pork and tofu.' },
@@ -147,6 +168,7 @@ export const countries: Country[] = [
 	{
 		code: 'GR',
 		name: 'Greece',
+		continent: 'Europe',
 		dishes: [
 			{
 				name: 'Moussaka',
@@ -158,6 +180,138 @@ export const countries: Country[] = [
 			},
 			{ name: 'Spanakopita', description: 'Spinach and feta pie wrapped in flaky phyllo.' }
 		]
+	},
+	{
+		code: 'ET',
+		name: 'Ethiopia',
+		continent: 'Africa',
+		dishes: [
+			{
+				name: 'Doro Wat',
+				description: 'Spicy chicken stew with berbere and hard-boiled eggs, eaten with injera.'
+			},
+			{
+				name: 'Kitfo',
+				description: 'Minced raw beef seasoned with mitmita chili and spiced butter.'
+			},
+			{
+				name: 'Shiro',
+				description: 'Smooth, spiced stew made from ground chickpeas or broad beans.'
+			}
+		]
+	},
+	{
+		code: 'NG',
+		name: 'Nigeria',
+		continent: 'Africa',
+		dishes: [
+			{ name: 'Jollof Rice', description: 'Rice cooked in a smoky tomato and pepper sauce.' },
+			{ name: 'Suya', description: 'Grilled beef skewers coated in a spicy peanut rub.' },
+			{
+				name: 'Egusi Soup',
+				description: 'Soup thickened with ground melon seeds, with leafy greens and meat.'
+			}
+		]
+	},
+	{
+		code: 'US',
+		name: 'United States',
+		continent: 'North America',
+		dishes: [
+			{
+				name: 'Smoked Brisket',
+				description: 'Texas-style beef brisket, slow-smoked until tender.'
+			},
+			{ name: 'Clam Chowder', description: 'Creamy New England soup with clams and potatoes.' },
+			{
+				name: 'Gumbo',
+				description: 'Louisiana stew built on a dark roux, with sausage, seafood and okra.'
+			}
+		]
+	},
+	{
+		code: 'JM',
+		name: 'Jamaica',
+		continent: 'North America',
+		dishes: [
+			{
+				name: 'Jerk Chicken',
+				description: 'Chicken marinated in scotch bonnet and allspice, then grilled.'
+			},
+			{
+				name: 'Ackee and Saltfish',
+				description: 'Ackee fruit sautéed with salt cod, onions and peppers.'
+			},
+			{
+				name: 'Curry Goat',
+				description: 'Goat slow-cooked in a spiced curry, served with rice and peas.'
+			}
+		]
+	},
+	{
+		code: 'BR',
+		name: 'Brazil',
+		continent: 'South America',
+		dishes: [
+			{
+				name: 'Feijoada',
+				description: 'Black bean and pork stew served with rice, greens and farofa.'
+			},
+			{ name: 'Pão de Queijo', description: 'Chewy cheese bread rolls made with cassava flour.' },
+			{ name: 'Moqueca', description: 'Fish stew with coconut milk, peppers and palm oil.' }
+		]
+	},
+	{
+		code: 'AR',
+		name: 'Argentina',
+		continent: 'South America',
+		dishes: [
+			{
+				name: 'Asado',
+				description: 'Cuts of beef and sausage grilled slowly over wood or charcoal.'
+			},
+			{ name: 'Empanadas', description: 'Baked or fried pastries, often filled with spiced beef.' },
+			{ name: 'Locro', description: 'Hearty stew of corn, squash, beans and meat.' }
+		]
+	},
+	{
+		code: 'AU',
+		name: 'Australia',
+		continent: 'Oceania',
+		dishes: [
+			{ name: 'Meat Pie', description: 'Hand-sized pie filled with minced meat and gravy.' },
+			{ name: 'Barramundi', description: 'Mild white fish, usually grilled or pan-fried.' },
+			{ name: 'Lamington', description: 'Sponge cake dipped in chocolate and rolled in coconut.' }
+		]
+	},
+	{
+		code: 'NZ',
+		name: 'New Zealand',
+		continent: 'Oceania',
+		dishes: [
+			{ name: 'Hāngī', description: 'Māori feast of meat and vegetables cooked in an earth oven.' },
+			{
+				name: 'Pavlova',
+				description: 'Meringue with a crisp shell and soft centre, topped with cream and fruit.'
+			},
+			{ name: 'Whitebait Fritters', description: 'Tiny whitebait fish bound in egg and fried.' }
+		]
+	},
+	{
+		code: 'FJ',
+		name: 'Fiji',
+		continent: 'Oceania',
+		dishes: [
+			{
+				name: 'Kokoda',
+				description: 'Raw fish marinated in citrus and finished with coconut cream.'
+			},
+			{
+				name: 'Lovo',
+				description: 'Meat, fish and root vegetables cooked in an underground oven.'
+			},
+			{ name: 'Rourou', description: 'Taro leaves simmered in coconut milk.' }
+		]
 	}
 ];
 
@@ -165,6 +319,10 @@ export function findCountry(code: string): Country | undefined {
 	return countries.find((country) => country.code === code.toUpperCase());
 }
 
-export function pickCountry(excludeCode?: string): Country {
-	return pickRandom(countries.filter((country) => country.code !== excludeCode));
+export function pickContinent(): Continent {
+	return pickRandom(continents);
+}
+
+export function pickCountries(continent: Continent, count: number): Country[] {
+	return shuffle(countries.filter((country) => country.continent === continent)).slice(0, count);
 }

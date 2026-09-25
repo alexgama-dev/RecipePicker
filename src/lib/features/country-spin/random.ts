@@ -1,3 +1,13 @@
-export function pickRandom<T>(items: T[]): T {
+export function pickRandom<T>(items: readonly T[]): T {
 	return items[Math.floor(Math.random() * items.length)];
+}
+
+// Fisher–Yates: `sort(() => Math.random() - 0.5)` looks simpler but is biased.
+export function shuffle<T>(items: readonly T[]): T[] {
+	const shuffled = [...items];
+	for (let i = shuffled.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+	}
+	return shuffled;
 }

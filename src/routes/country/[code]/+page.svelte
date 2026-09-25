@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CountryDetails from '$lib/features/country-spin/CountryDetails.svelte';
-	import SpinButton from '$lib/features/country-spin/SpinButton.svelte';
+	import CountrySpin from '$lib/features/country-spin/CountrySpin.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -11,4 +11,4 @@
 </svelte:head>
 
 <CountryDetails country={data.country} />
-<SpinButton label="Spin again" currentCode={data.country.code} />
+<CountrySpin label="Spin again" />
