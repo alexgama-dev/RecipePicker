@@ -4,7 +4,11 @@
 	import { fly } from 'svelte/transition';
 	import { continentDesigns, type Continent } from './countries';
 
-	let { continent, onopen }: { continent: Continent; onopen: () => void } = $props();
+	let {
+		continent,
+		onreveal,
+		onopen
+	}: { continent: Continent; onreveal: () => void; onopen: () => void } = $props();
 
 	// Back up → flips to the front → turns back over and opens.
 	const Stage = {
@@ -19,6 +23,11 @@
 
 	const design = $derived(continentDesigns[continent]);
 	const frontUp = $derived(stage === Stage.Flipping || stage === Stage.Revealed);
+
+	// An effect rather than a call in flipped(), so it also fires when reduced motion starts it revealed.
+	$effect(() => {
+		if (stage === Stage.Revealed) onreveal();
+	});
 
 	function arrived() {
 		if (stage === Stage.Arriving) setTimeout(() => (stage = Stage.Flipping), 400);

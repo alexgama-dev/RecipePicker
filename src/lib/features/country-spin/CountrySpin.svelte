@@ -3,6 +3,7 @@
 	import { resolve } from '$app/paths';
 	import Envelope from './Envelope.svelte';
 	import Postcard from './Postcard.svelte';
+	import WorldMap from './WorldMap.svelte';
 	import { pickContinent, pickCountries, type Continent, type Country } from './countries';
 
 	const PhaseName = {
@@ -17,8 +18,10 @@
 		| { name: typeof PhaseName.Postcards; continent: Continent; options: Country[] };
 
 	let phase = $state<Phase>({ name: PhaseName.Idle });
+	let litContinent = $state<Continent>();
 
 	function spin() {
+		litContinent = undefined;
 		phase = { name: PhaseName.Continent, continent: pickContinent() };
 	}
 
@@ -31,12 +34,18 @@
 	}
 </script>
 
+<WorldMap dimmed={phase.name !== PhaseName.Idle} highlight={litContinent} />
+
 {#if phase.name === PhaseName.Idle}
 	<button class="action" onclick={spin}>Spin</button>
 {:else if phase.name === PhaseName.Continent}
 	{@const continent = phase.continent}
 	<p>Your postcards are from…</p>
-	<Envelope {continent} onopen={() => openEnvelope(continent)} />
+	<Envelope
+		{continent}
+		onreveal={() => (litContinent = continent)}
+		onopen={() => openEnvelope(continent)}
+	/>
 {:else}
 	<h2>Pick a postcard from {phase.continent}</h2>
 	<ul>
