@@ -26,3 +26,4 @@ SvelteKit + Svelte 5 (runes only) + TypeScript. Package manager: pnpm.
 ## Testing
 
 - A test should break when the behaviour breaks, not when unrelated data changes: don't rely on the order or contents of static data unless that is what's being tested.
+- Component tests are `*.svelte.spec.ts` files. They run in real Chromium with reduced motion forced on. Run `pnpm exec playwright install chromium` once per machine.
