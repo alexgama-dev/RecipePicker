@@ -1,4 +1,4 @@
-# FoodThing
+# Recipe Roulette
 
 SvelteKit + Svelte 5 (runes only) + TypeScript. Package manager: pnpm.
 

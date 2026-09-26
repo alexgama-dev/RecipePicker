@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.country.name} · FoodThing</title>
+	<title>{data.country.name} · Recipe Roulette</title>
 </svelte:head>
 
 <CountryDetails country={data.country} />

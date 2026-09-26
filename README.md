@@ -1,4 +1,4 @@
-# FoodThing
+# Recipe Roulette
 
 Spin a wheel, get a random country, and discover dishes from there to cook yourself.
 

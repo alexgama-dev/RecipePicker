@@ -3,8 +3,14 @@
 </script>
 
 <svelte:head>
-	<title>FoodThing</title>
+	<title>Recipe Roulette</title>
 </svelte:head>
 
-<h1>FoodThing</h1>
+<h1>Recipe Roulette</h1>
 <CountrySpin />
+
+<style>
+	h1 {
+		text-align: center;
+	}
+</style>
