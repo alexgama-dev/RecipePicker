@@ -13,12 +13,14 @@ SvelteKit + Svelte 5 (runes only) + TypeScript. Package manager: pnpm.
 - Search for an existing helper before writing a new one.
 - Features live in `src/lib/features/<feature>/`; routes stay thin.
 - Comments only for a non-obvious "why".
+- No magic strings for states: use an `as const` object (TypeScript enums don't work inside Svelte components).
 - Run `pnpm check`, `pnpm lint` and `pnpm test` before calling work done.
 
 ## Workflow
 
 - Work is tracked in Linear (team `FOOD`). One branch per issue, named with Linear's branch name (e.g. `alex/food-12-envelope-animation`).
 - Post the proposal as a comment on the Linear issue; implement after it's approved there.
+- Rules agreed during a ticket go into AGENTS.md in the same PR, called out in the PR description. Standalone rule changes get their own ticket.
 - Never commit to `main` directly. Open a PR titled `FOOD-12: <title>` as ready for review, not a draft. Branch protection blocks merging until CI passes.
 
 ## Testing
