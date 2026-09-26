@@ -5,19 +5,25 @@
 	import Postcard from './Postcard.svelte';
 	import { pickContinent, pickCountries, type Continent, type Country } from './countries';
 
-	type Phase =
-		| { name: 'idle' }
-		| { name: 'continent'; continent: Continent }
-		| { name: 'postcards'; continent: Continent; options: Country[] };
+	const PhaseName = {
+		Idle: 'idle',
+		Continent: 'continent',
+		Postcards: 'postcards'
+	} as const;
 
-	let phase = $state<Phase>({ name: 'idle' });
+	type Phase =
+		| { name: typeof PhaseName.Idle }
+		| { name: typeof PhaseName.Continent; continent: Continent }
+		| { name: typeof PhaseName.Postcards; continent: Continent; options: Country[] };
+
+	let phase = $state<Phase>({ name: PhaseName.Idle });
 
 	function spin() {
-		phase = { name: 'continent', continent: pickContinent() };
+		phase = { name: PhaseName.Continent, continent: pickContinent() };
 	}
 
 	function openEnvelope(continent: Continent) {
-		phase = { name: 'postcards', continent, options: pickCountries(continent, 3) };
+		phase = { name: PhaseName.Postcards, continent, options: pickCountries(continent, 3) };
 	}
 
 	function choose(country: Country) {
@@ -25,9 +31,9 @@
 	}
 </script>
 
-{#if phase.name === 'idle'}
+{#if phase.name === PhaseName.Idle}
 	<button class="action" onclick={spin}>Spin</button>
-{:else if phase.name === 'continent'}
+{:else if phase.name === PhaseName.Continent}
 	{@const continent = phase.continent}
 	<p>Your postcards are from…</p>
 	<Envelope {continent} onopen={() => openEnvelope(continent)} />
