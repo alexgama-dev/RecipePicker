@@ -25,7 +25,7 @@ SvelteKit + Svelte 5 (runes only) + TypeScript. Package manager: pnpm.
 
 ## Ticket flow
 
-- Moving a ticket to Needs proposal, Approved or Changes requested starts a cloud routine run for it (Linear webhook → `/api/linear-webhook` → routine). The routine follows the `ticket-flow` skill.
+- Moving a ticket to Needs Proposal, Approved or Changes Requested starts a cloud routine run for it (Linear webhook → `/api/linear-webhook` → routine). The routine follows the `ticket-flow` skill.
 - Claude works in Linear as its own "Claude" account in every session, local or cloud, so comments by that account are Claude's and everyone else's are feedback.
 
 ## Testing

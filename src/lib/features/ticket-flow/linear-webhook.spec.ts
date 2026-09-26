@@ -64,7 +64,7 @@ describe('runRequest', () => {
 	});
 
 	it('ignores moves into other statuses', () => {
-		expect(runRequest(statusChange('Proposal review'), now)).toBeUndefined();
+		expect(runRequest(statusChange('Proposal Review'), now)).toBeUndefined();
 	});
 
 	it('ignores updates that are not status changes', () => {
