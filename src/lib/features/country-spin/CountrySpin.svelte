@@ -5,8 +5,6 @@
 	import Postcard from './Postcard.svelte';
 	import { pickContinent, pickCountries, type Continent, type Country } from './countries';
 
-	let { label = 'Spin' }: { label?: string } = $props();
-
 	type Phase =
 		| { name: 'idle' }
 		| { name: 'continent'; continent: Continent }
@@ -23,13 +21,12 @@
 	}
 
 	function choose(country: Country) {
-		phase = { name: 'idle' };
 		goto(resolve('/country/[code]', { code: country.code.toLowerCase() }));
 	}
 </script>
 
 {#if phase.name === 'idle'}
-	<button class="action" onclick={spin}>{label}</button>
+	<button class="action" onclick={spin}>Spin</button>
 {:else if phase.name === 'continent'}
 	{@const continent = phase.continent}
 	<p>Your postcards are from…</p>
