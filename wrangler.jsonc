@@ -1,5 +1,5 @@
 {
-	"name": "recipe-picker",
+	"name": "recipepicker",
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2026-09-26",
 	"compatibility_flags": ["nodejs_als"],
