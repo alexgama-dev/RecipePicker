@@ -1,7 +1,7 @@
 export const TriggerStatus = {
-	NeedsProposal: 'Needs proposal',
+	NeedsProposal: 'Needs Proposal',
 	Approved: 'Approved',
-	ChangesRequested: 'Changes requested'
+	ChangesRequested: 'Changes Requested'
 } as const;
 
 const triggerStatuses: string[] = Object.values(TriggerStatus);
