@@ -6,7 +6,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>FoodThing</title>
+	<title>Recipe Roulette</title>
 </svelte:head>
 
 <main>
