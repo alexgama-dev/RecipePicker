@@ -1,29 +1,64 @@
 <script lang="ts">
+	import { backOut } from 'svelte/easing';
 	import { prefersReducedMotion } from 'svelte/motion';
-	import type { Continent } from './countries';
+	import { fly } from 'svelte/transition';
+	import { continentDesigns, type Continent } from './countries';
 
 	let { continent, onopen }: { continent: Continent; onopen: () => void } = $props();
 
-	let opening = $state(false);
+	// Back up → flips to the front → turns back over and opens.
+	const Stage = {
+		Arriving: 'arriving',
+		Flipping: 'flipping',
+		Revealed: 'revealed',
+		Opening: 'opening'
+	} as const;
+	type Stage = (typeof Stage)[keyof typeof Stage];
+
+	let stage = $state<Stage>(prefersReducedMotion.current ? Stage.Revealed : Stage.Arriving);
+
+	const design = $derived(continentDesigns[continent]);
+	const frontUp = $derived(stage === Stage.Flipping || stage === Stage.Revealed);
+
+	function arrived() {
+		if (stage === Stage.Arriving) setTimeout(() => (stage = Stage.Flipping), 400);
+	}
+
+	function flipped(event: TransitionEvent) {
+		if (event.target === event.currentTarget && stage === Stage.Flipping) stage = Stage.Revealed;
+	}
 
 	function open() {
 		if (prefersReducedMotion.current) {
 			onopen();
 			return;
 		}
-		opening = true;
+		stage = Stage.Opening;
 	}
 </script>
 
 <button
 	class="envelope"
-	class:opening
-	disabled={opening}
-	aria-label="Open envelope from {continent}"
+	class:front-up={frontUp}
+	class:opening={stage === Stage.Opening}
+	disabled={stage !== Stage.Revealed}
+	aria-label={stage === Stage.Revealed || stage === Stage.Opening
+		? `Open envelope from ${continent}`
+		: 'Envelope'}
+	style:--colour={design.colour}
 	onclick={open}
+	in:fly|global={{ y: -200, duration: prefersReducedMotion.current ? 0 : 500, easing: backOut }}
+	onintroend={arrived}
 >
-	<span class="body">{continent}</span>
-	<span class="flap" ontransitionend={onopen}></span>
+	<span class="card" ontransitionend={flipped}>
+		<span class="face back">
+			<span class="flap" ontransitionend={onopen}></span>
+		</span>
+		<span class="face front">
+			<span class="stamp">{design.code}</span>
+			<span class="address">{continent}</span>
+		</span>
+	</span>
 </button>
 
 <style>
@@ -51,16 +86,51 @@
 		cursor: default;
 	}
 
-	.body {
+	.card {
 		position: absolute;
 		inset: 0;
-		display: grid;
-		place-items: end center;
-		padding-bottom: 1.5rem;
+		transform-style: preserve-3d;
+		transition: transform 700ms ease-in-out;
+	}
+
+	.front-up .card {
+		transform: rotateY(180deg);
+	}
+
+	.face {
+		position: absolute;
+		inset: 0;
 		border-radius: 0.5rem;
 		background: #f4e4c1;
 		box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+		backface-visibility: hidden;
+	}
+
+	/* Keeps the flap's 3D inside the back face, so it hides with it when the front is up. */
+	.back {
+		perspective: 800px;
+	}
+
+	.front {
+		display: grid;
+		place-items: center;
+		transform: rotateY(180deg);
+		background:
+			linear-gradient(135deg, transparent 0 8%, var(--colour) 8% 14%, transparent 14%), #f4e4c1;
+	}
+
+	.address {
 		font-size: 1.5rem;
+		font-weight: 600;
+	}
+
+	.stamp {
+		position: absolute;
+		top: 0.75rem;
+		right: 0.75rem;
+		padding: 0.25rem 0.375rem;
+		border: 2px dashed var(--colour);
+		font-size: 0.75rem;
 		font-weight: 600;
 	}
 
@@ -70,7 +140,8 @@
 		background: #e9d3a3;
 		clip-path: polygon(0 0, 100% 0, 50% 100%);
 		transform-origin: top;
-		transition: transform 500ms ease-in;
+		/* Waits for the card to turn back over before opening. */
+		transition: transform 500ms ease-in 700ms;
 	}
 
 	.opening .flap {
