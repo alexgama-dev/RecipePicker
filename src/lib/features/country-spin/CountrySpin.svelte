@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import Envelope from './Envelope.svelte';
 	import Postcard from './Postcard.svelte';
 	import { pickContinent, pickCountries, type Continent, type Country } from './countries';
 
@@ -32,8 +33,7 @@
 {:else if phase.name === 'continent'}
 	{@const continent = phase.continent}
 	<p>Your postcards are from…</p>
-	<h2>{continent}</h2>
-	<button class="action" onclick={() => openEnvelope(continent)}>Open the envelope</button>
+	<Envelope {continent} onopen={() => openEnvelope(continent)} />
 {:else}
 	<h2>Pick a postcard from {phase.continent}</h2>
 	<ul>
