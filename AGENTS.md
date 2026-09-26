@@ -18,10 +18,15 @@ SvelteKit + Svelte 5 (runes only) + TypeScript. Package manager: pnpm.
 
 ## Workflow
 
-- Work is tracked in Linear (team `FOOD`). One branch per issue, named with Linear's branch name (e.g. `alex/food-12-envelope-animation`).
+- Work is tracked in Linear (team `FOOD`). One branch per issue, named with Linear's branch name (e.g. `alex/food-12-envelope-animation`), or `claude/food-12-<slug>` for work done by the ticket-flow routine.
 - Post the proposal as a comment on the Linear issue; implement after it's approved there.
 - Rules agreed during a ticket go into AGENTS.md in the same PR, called out in the PR description. Standalone rule changes get their own ticket.
 - Never commit to `main` directly. Open a PR titled `FOOD-12: <title>` as ready for review, not a draft. Branch protection blocks merging until CI passes.
+
+## Ticket flow
+
+- Moving a ticket to Needs proposal, Approved or Changes requested starts a cloud routine run for it (Linear webhook → `/api/linear-webhook` → routine). The routine follows the `ticket-flow` skill.
+- Claude works in Linear as its own "Claude" account in every session, local or cloud, so comments by that account are Claude's and everyone else's are feedback.
 
 ## Testing
 
