@@ -62,7 +62,7 @@
 		padding: 0.75rem 2rem;
 		border: none;
 		border-radius: 999px;
-		background: #e8590c;
+		background: #0b7285;
 		color: white;
 		font: inherit;
 		font-weight: 600;
@@ -70,7 +70,7 @@
 	}
 
 	.action:hover {
-		background: #d9480f;
+		background: #095c6b;
 	}
 
 	ul {
