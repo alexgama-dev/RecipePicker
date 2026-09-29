@@ -11,4 +11,4 @@
 </svelte:head>
 
 <CountryDetails country={data.country} />
-<a href={resolve('/')}>Spin again</a>
+<a href={resolve('/')}>← Back</a>

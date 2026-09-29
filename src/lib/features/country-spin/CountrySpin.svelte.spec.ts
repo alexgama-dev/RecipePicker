@@ -11,15 +11,15 @@ const envelope = () => page.getByRole('button', { name: /^Open envelope from / }
 
 async function spin() {
 	render(CountrySpin);
-	await page.getByRole('button', { name: 'Spin' }).click();
+	await page.getByRole('button', { name: 'Spin Random' }).click();
 	const label = envelope().element().getAttribute('aria-label')!;
 	return label.replace('Open envelope from ', '');
 }
 
 describe('CountrySpin', () => {
-	it('swaps the Spin button for an envelope from a continent', async () => {
+	it('swaps the Spin Random button for an envelope from a continent', async () => {
 		await spin();
-		await expect.element(page.getByRole('button', { name: 'Spin' })).not.toBeInTheDocument();
+		await expect.element(page.getByRole('button', { name: 'Spin Random' })).not.toBeInTheDocument();
 		await expect.element(envelope()).toBeVisible();
 	});
 
@@ -45,5 +45,12 @@ describe('CountrySpin', () => {
 		const code = postcard.element().querySelector('.stamp')!.textContent!;
 		await postcard.getByRole('button').click();
 		expect(goto).toHaveBeenCalledWith(`/country/${code.toLowerCase()}`);
+	});
+
+	it('tells the page when a spin starts', async () => {
+		const onspin = vi.fn();
+		render(CountrySpin, { onspin });
+		await page.getByRole('button', { name: 'Spin Random' }).click();
+		expect(onspin).toHaveBeenCalledOnce();
 	});
 });
