@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { countries } from '$lib/features/country-spin/countries';
+import { countries } from '@recipe-roulette/food-data';
 import { searchCountries } from './search';
 
 describe('searchCountries', () => {

@@ -4,7 +4,12 @@
 	import Envelope from './Envelope.svelte';
 	import Postcard from './Postcard.svelte';
 	import WorldMap from './WorldMap.svelte';
-	import { pickContinent, pickCountries, type Continent, type Country } from './countries';
+	import {
+		pickContinent,
+		pickCountries,
+		type Continent,
+		type Country
+	} from '@recipe-roulette/food-data';
 
 	const PhaseName = {
 		Idle: 'idle',

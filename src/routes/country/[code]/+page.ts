@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { findCountry } from '$lib/features/country-spin/countries';
+import { findCountry } from '@recipe-roulette/food-data';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = ({ params }) => {

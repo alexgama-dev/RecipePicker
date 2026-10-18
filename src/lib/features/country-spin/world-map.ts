@@ -1,5 +1,5 @@
 // Generated once from Natural Earth (public domain) with mapshaper; see the FOOD-3 PR for the steps.
-import type { Continent } from './countries';
+import type { Continent } from '@recipe-roulette/food-data';
 
 export const viewBox = '0 0 1000 425';
 

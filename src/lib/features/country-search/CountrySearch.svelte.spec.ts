@@ -2,7 +2,7 @@ import { goto } from '$app/navigation';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
 import { render } from 'vitest-browser-svelte';
-import { countries } from '$lib/features/country-spin/countries';
+import { countries } from '@recipe-roulette/food-data';
 import CountrySearch from './CountrySearch.svelte';
 
 vi.mock('$app/navigation', () => ({ goto: vi.fn() }));
