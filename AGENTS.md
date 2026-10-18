@@ -24,6 +24,7 @@ SvelteKit + Svelte 5 (runes only) + TypeScript. Package manager: pnpm.
 - Shared data and logic go in `packages/food-data`, not copied into the app.
 - The `as const` rule for states applies here too.
 - Tests are `*.test.tsx` next to the component (jest-expo + React Native Testing Library).
+- Merges to `main` that touch the app run `mobile/.eas/workflows/release.yml`: an OTA update for JS-only changes, a new APK when native parts change (Expo emails the install link).
 
 ## Workflow
 

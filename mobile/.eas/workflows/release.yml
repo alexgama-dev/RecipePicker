@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    # Relative to the repo root, not the mobile/ base directory.
+    paths: ['mobile/**', 'packages/food-data/**', 'pnpm-lock.yaml']
+
+jobs:
+  fingerprint:
+    type: fingerprint
+    environment: production
+
+  get_build:
+    needs: [fingerprint]
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint.outputs.android_fingerprint_hash }}
+      platform: android
+      profile: production
+
+  build:
+    needs: [get_build]
+    if: ${{ !needs.get_build.outputs.build_id }}
+    type: build
+    params:
+      platform: android
+      profile: production
+
+  update:
+    needs: [get_build]
+    if: ${{ needs.get_build.outputs.build_id }}
+    type: update
+    params:
+      channel: production
+      platform: android
