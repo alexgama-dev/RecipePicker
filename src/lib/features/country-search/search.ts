@@ -1,4 +1,4 @@
-import { countries, type Country } from '$lib/features/country-spin/countries';
+import { countries, type Country } from '@recipe-roulette/food-data';
 
 export function searchCountries(query: string): Country[] {
 	const q = query.trim().toLowerCase();

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Country } from './countries';
+	import type { Country } from '@recipe-roulette/food-data';
 
 	let { country }: { country: Country } = $props();
 </script>

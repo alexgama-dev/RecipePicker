@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { page } from 'vitest/browser';
 import { render } from 'vitest-browser-svelte';
 import CountrySpin from './CountrySpin.svelte';
-import { countries } from './countries';
+import { countries } from '@recipe-roulette/food-data';
 
 vi.mock('$app/navigation', () => ({ goto: vi.fn() }));
 

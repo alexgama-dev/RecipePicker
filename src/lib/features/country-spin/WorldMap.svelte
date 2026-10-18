@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { continentDesigns, continents, type Continent } from './countries';
+	import { continents, type Continent } from '@recipe-roulette/food-data';
+	import { continentDesigns } from './continent-designs';
 	import { continentPaths, viewBox } from './world-map';
 
 	let { dimmed, highlight }: { dimmed: boolean; highlight?: Continent } = $props();

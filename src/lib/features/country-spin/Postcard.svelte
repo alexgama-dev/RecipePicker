@@ -2,7 +2,7 @@
 	import { backOut } from 'svelte/easing';
 	import { prefersReducedMotion } from 'svelte/motion';
 	import { fly } from 'svelte/transition';
-	import type { Country } from './countries';
+	import type { Country } from '@recipe-roulette/food-data';
 
 	let { country, index, onchoose }: { country: Country; index: number; onchoose: () => void } =
 		$props();

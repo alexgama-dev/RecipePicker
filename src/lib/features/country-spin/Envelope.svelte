@@ -2,7 +2,8 @@
 	import { backOut } from 'svelte/easing';
 	import { prefersReducedMotion } from 'svelte/motion';
 	import { fly } from 'svelte/transition';
-	import { continentDesigns, type Continent } from './countries';
+	import type { Continent } from '@recipe-roulette/food-data';
+	import { continentDesigns } from './continent-designs';
 
 	let {
 		continent,
