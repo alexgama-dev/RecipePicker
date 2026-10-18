@@ -1,8 +1,8 @@
 {
 	"expo": {
 		"name": "Recipe Roulette",
-		"slug": "recipe-roulette",
-		"owner": "alexgamadev",
+		"slug": "culinary-nomad",
+		"owner": "culinary-nomads",
 		"scheme": "reciperoulette",
 		"version": "0.0.1",
 		"runtimeVersion": {
