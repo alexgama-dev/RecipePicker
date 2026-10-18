@@ -1,0 +1,15 @@
+{
+	"expo": {
+		"name": "Recipe Roulette",
+		"slug": "recipe-roulette",
+		"scheme": "reciperoulette",
+		"version": "0.0.1",
+		"orientation": "portrait",
+		"userInterfaceStyle": "light",
+		"platforms": ["android"],
+		"android": {
+			"package": "com.recipeRoulette.app"
+		},
+		"plugins": ["expo-router", "expo-status-bar"]
+	}
+}
