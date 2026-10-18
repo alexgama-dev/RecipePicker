@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import type { Country } from '@recipe-roulette/food-data';
-	import { searchCountries } from './search';
+	import { searchCountries, type Country } from '@recipe-roulette/food-data';
 
 	let query = $state('');
 	let open = $state(false);

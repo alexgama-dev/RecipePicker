@@ -1,6 +1,7 @@
 import prettier from 'eslint-config-prettier';
 import path from 'node:path';
 import js from '@eslint/js';
+import expo from 'eslint-config-expo/flat.js';
 import svelte from 'eslint-plugin-svelte';
 import { defineConfig, includeIgnoreFile } from 'eslint/config';
 import globals from 'globals';
@@ -13,6 +14,7 @@ export default defineConfig(
 	js.configs.recommended,
 	ts.configs.recommended,
 	svelte.configs.recommended,
+	expo.map((config) => ({ ...config, basePath: 'mobile' })),
 	prettier,
 	svelte.configs.prettier,
 	{
@@ -31,6 +33,14 @@ export default defineConfig(
 				extraFileExtensions: ['.svelte'],
 				parser: ts.parser
 			}
+		}
+	},
+	{
+		files: ['mobile/**'],
+		settings: {
+			// eslint-plugin-react's version detection calls an API ESLint 10 removed.
+			react: { version: '19.3' },
+			'import/resolver': { typescript: { project: 'mobile/tsconfig.json' } }
 		}
 	},
 	{

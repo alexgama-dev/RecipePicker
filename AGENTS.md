@@ -14,7 +14,16 @@ SvelteKit + Svelte 5 (runes only) + TypeScript. Package manager: pnpm.
 - Features live in `src/lib/features/<feature>/`; routes stay thin.
 - Comments only for a non-obvious "why".
 - No magic strings for states: use an `as const` object (TypeScript enums don't work inside Svelte components).
-- Run `pnpm check`, `pnpm lint` and `pnpm test` before calling work done.
+- Run `pnpm check`, `pnpm lint` and `pnpm test` before calling work done, plus `pnpm test:mobile` when `mobile/` changes.
+
+## mobile/
+
+- Expo (Expo Router) + React + TypeScript. Android only for now.
+- `pnpm --filter mobile start` / `pnpm test:mobile`
+- Features live in `mobile/src/features/<feature>/`; screens in `mobile/app/` stay thin.
+- Shared data and logic go in `packages/food-data`, not copied into the app.
+- The `as const` rule for states applies here too.
+- Tests are `*.test.tsx` next to the component (jest-expo + React Native Testing Library).
 
 ## Workflow
 
