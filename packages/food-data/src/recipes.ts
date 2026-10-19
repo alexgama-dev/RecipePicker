@@ -1,3 +1,5 @@
+import type { Dish } from './countries';
+
 export const Difficulty = { Easy: 'easy', Medium: 'medium', Hard: 'hard' } as const;
 export type Difficulty = (typeof Difficulty)[keyof typeof Difficulty];
 
@@ -5,6 +7,9 @@ export type Recipe = {
 	servings: number;
 	minutes: number;
 	difficulty: Difficulty;
+	aiDrafted: boolean;
+	// Only true once someone has cooked it and it worked.
+	tested: boolean;
 	ingredients: string[];
 	steps: string[];
 };
@@ -15,6 +20,8 @@ export const recipes: Record<string, Recipe> = {
 		servings: 2,
 		minutes: 45,
 		difficulty: Difficulty.Medium,
+		aiDrafted: true,
+		tested: false,
 		ingredients: [
 			'200 g (7 oz) fresh ramen noodles',
 			'1 l (4 cups) chicken stock',
@@ -41,6 +48,8 @@ export const recipes: Record<string, Recipe> = {
 		servings: 4,
 		minutes: 50,
 		difficulty: Difficulty.Medium,
+		aiDrafted: true,
+		tested: false,
 		ingredients: [
 			'600 g (1⅓ lb) pork shoulder, thinly sliced',
 			'3 dried guajillo chiles, seeds removed',
@@ -70,6 +79,8 @@ export const recipes: Record<string, Recipe> = {
 		servings: 2,
 		minutes: 20,
 		difficulty: Difficulty.Easy,
+		aiDrafted: true,
+		tested: false,
 		ingredients: [
 			'200 g (7 oz) spaghetti',
 			'100 g (3½ oz) guanciale or pancetta, cut into strips',
@@ -91,6 +102,8 @@ export const recipes: Record<string, Recipe> = {
 		servings: 4,
 		minutes: 60,
 		difficulty: Difficulty.Medium,
+		aiDrafted: true,
+		tested: false,
 		ingredients: [
 			'700 g (1½ lb) boneless chicken thighs, in bite-size pieces',
 			'150 g (⅔ cup) plain yoghurt',
@@ -119,6 +132,8 @@ export const recipes: Record<string, Recipe> = {
 		servings: 2,
 		minutes: 30,
 		difficulty: Difficulty.Medium,
+		aiDrafted: true,
+		tested: false,
 		ingredients: [
 			'150 g (5 oz) flat rice noodles',
 			'200 g (7 oz) raw prawns (shrimp), peeled',
@@ -146,6 +161,8 @@ export const recipes: Record<string, Recipe> = {
 		servings: 2,
 		minutes: 40,
 		difficulty: Difficulty.Medium,
+		aiDrafted: true,
+		tested: false,
 		ingredients: [
 			'300 g (1½ cups) cooked short-grain rice',
 			'150 g (5 oz) beef mince (ground beef)',
@@ -173,6 +190,8 @@ export const recipes: Record<string, Recipe> = {
 		servings: 4,
 		minutes: 75,
 		difficulty: Difficulty.Medium,
+		aiDrafted: true,
+		tested: false,
 		ingredients: [
 			'400 g (2 cups) long-grain parboiled rice, rinsed',
 			'2 red bell peppers, roughly chopped',
@@ -200,6 +219,8 @@ export const recipes: Record<string, Recipe> = {
 		servings: 6,
 		minutes: 40,
 		difficulty: Difficulty.Easy,
+		aiDrafted: true,
+		tested: false,
 		ingredients: [
 			'250 g (2 cups) tapioca flour',
 			'125 ml (½ cup) milk',
@@ -221,4 +242,8 @@ export const recipes: Record<string, Recipe> = {
 
 export function findRecipe(slug: string): Recipe | undefined {
 	return recipes[slug];
+}
+
+export function recipeSearchUrl(dish: Dish): string {
+	return `https://www.google.com/search?q=${encodeURIComponent(`${dish.name} recipe`)}`;
 }

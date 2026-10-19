@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/react-native';
-import { findDish, recipes } from '@recipe-roulette/food-data';
+import { Linking } from 'react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
+import { findDish, recipeSearchUrl, recipes } from '@recipe-roulette/food-data';
 import { DishDetails } from './DishDetails';
 
 const [slug, recipe] = Object.entries(recipes)[0];
@@ -18,4 +19,35 @@ it('says the recipe is coming soon when there is none', async () => {
 	expect(screen.getByText(dish.description)).toBeOnTheScreen();
 	expect(screen.getByText('Recipe coming soon')).toBeOnTheScreen();
 	expect(screen.queryByRole('heading', { name: 'Ingredients' })).not.toBeOnTheScreen();
+});
+
+it('badges an AI-drafted, untested recipe', async () => {
+	await render(
+		<DishDetails
+			dish={dish}
+			country={country}
+			recipe={{ ...recipe, aiDrafted: true, tested: false }}
+		/>
+	);
+	expect(screen.getByText('AI-drafted')).toBeOnTheScreen();
+	expect(screen.getByText('Untested')).toBeOnTheScreen();
+});
+
+it('shows no badges for a tested recipe written by a person', async () => {
+	await render(
+		<DishDetails
+			dish={dish}
+			country={country}
+			recipe={{ ...recipe, aiDrafted: false, tested: true }}
+		/>
+	);
+	expect(screen.queryByText('AI-drafted')).not.toBeOnTheScreen();
+	expect(screen.queryByText('Untested')).not.toBeOnTheScreen();
+});
+
+it('opens a recipe search for the dish', async () => {
+	const openURL = jest.spyOn(Linking, 'openURL').mockResolvedValue();
+	await render(<DishDetails dish={dish} country={country} recipe={undefined} />);
+	fireEvent.press(screen.getByRole('link', { name: 'Find recipes online' }));
+	expect(openURL).toHaveBeenCalledWith(recipeSearchUrl(dish));
 });
