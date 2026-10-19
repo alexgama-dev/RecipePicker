@@ -1,6 +1,6 @@
 import { render, screen, userEvent } from '@testing-library/react-native';
 import { renderRouter } from 'expo-router/testing-library';
-import { countries, popularDishes } from '@recipe-roulette/food-data';
+import { countries, countryLabel, popularDishes } from '@recipe-roulette/food-data';
 import { Home } from './Home';
 
 const input = () => screen.getByLabelText('Search a country or dish');
@@ -16,7 +16,7 @@ it('shows every popular dish', async () => {
 it('swaps the sections for results while searching', async () => {
 	await render(<Home />);
 	await userEvent.type(input(), country.name);
-	expect(screen.getByText(country.name)).toBeOnTheScreen();
+	expect(screen.getByText(countryLabel(country))).toBeOnTheScreen();
 	expect(screen.queryByRole('heading', { name: 'Popular' })).toBeNull();
 
 	await userEvent.clear(input());

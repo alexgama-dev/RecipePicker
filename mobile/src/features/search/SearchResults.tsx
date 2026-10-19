@@ -1,6 +1,6 @@
 import { Link } from 'expo-router';
 import { Pressable, SectionList, StyleSheet, Text } from 'react-native';
-import { searchCountries, searchDishes } from '@recipe-roulette/food-data';
+import { countryLabel, searchCountries, searchDishes } from '@recipe-roulette/food-data';
 import { useColors } from '@/theme';
 
 export function SearchResults({ query }: { query: string }) {
@@ -11,7 +11,7 @@ export function SearchResults({ query }: { query: string }) {
 			data: searchCountries(query).map((country) => ({
 				key: country.code,
 				href: `/country/${country.code.toLowerCase()}`,
-				name: country.name,
+				name: countryLabel(country),
 				detail: country.continent
 			}))
 		},
@@ -21,7 +21,7 @@ export function SearchResults({ query }: { query: string }) {
 				key: dish.slug,
 				href: `/dish/${dish.slug}`,
 				name: dish.name,
-				detail: country.name
+				detail: countryLabel(country)
 			}))
 		}
 	].filter((section) => section.data.length);

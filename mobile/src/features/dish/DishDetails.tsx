@@ -1,6 +1,7 @@
 import { Link } from 'expo-router';
 import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import {
+	countryLabel,
 	Difficulty,
 	recipeSearchUrl,
 	type Country,
@@ -29,7 +30,7 @@ export function DishDetails({ dish, country, recipe }: Props) {
 				href={`/country/${country.code.toLowerCase()}`}
 				style={[styles.country, { color: c.teal }]}
 			>
-				{country.name}
+				{countryLabel(country)}
 			</Link>
 			<Text style={{ color: c.text }}>{dish.description}</Text>
 			{recipe ? (

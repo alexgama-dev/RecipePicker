@@ -1,6 +1,6 @@
 import { Link } from 'expo-router';
 import { Pressable, StyleSheet, Text } from 'react-native';
-import type { Country, Dish } from '@recipe-roulette/food-data';
+import { countryLabel, type Country, type Dish } from '@recipe-roulette/food-data';
 import { useColors } from '@/theme';
 
 type Props = { dish: Dish; country: Country; compact?: boolean };
@@ -18,7 +18,7 @@ export function DishCard({ dish, country, compact }: Props) {
 				])}
 			>
 				<Text style={[styles.dish, { color: c.text }]}>{dish.name}</Text>
-				<Text style={[styles.country, { color: c.teal }]}>{country.name}</Text>
+				<Text style={[styles.country, { color: c.teal }]}>{countryLabel(country)}</Text>
 				{!compact && <Text style={{ color: c.text }}>{dish.description}</Text>}
 			</Pressable>
 		</Link>

@@ -2,6 +2,7 @@ import { Link } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import {
+	countryLabel,
 	pickContinent,
 	pickCountries,
 	type Continent,
@@ -38,7 +39,7 @@ export function CountrySpin() {
 									{ borderColor: c.border, backgroundColor: c.surface }
 								])}
 							>
-								<Text style={[styles.country, { color: c.text }]}>{country.name}</Text>
+								<Text style={[styles.country, { color: c.text }]}>{countryLabel(country)}</Text>
 							</Pressable>
 						</Link>
 					))}
