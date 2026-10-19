@@ -7,9 +7,10 @@ import {
 	type Continent,
 	type Country
 } from '@recipe-roulette/food-data';
-import { colors } from '@/theme';
+import { useColors } from '@/theme';
 
 export function CountrySpin() {
+	const c = useColors();
 	const [pick, setPick] = useState<{ continent: Continent; options: Country[] }>();
 
 	function spin() {
@@ -19,18 +20,25 @@ export function CountrySpin() {
 
 	return (
 		<View style={styles.container}>
-			<Pressable style={styles.button} role="button" onPress={spin}>
-				<Text style={styles.buttonText}>{pick ? 'Spin again' : 'Spin Random'}</Text>
+			<Pressable style={[styles.button, { backgroundColor: c.teal }]} role="button" onPress={spin}>
+				<Text style={[styles.buttonText, { color: c.surface }]}>
+					{pick ? 'Spin again' : 'Spin Random'}
+				</Text>
 			</Pressable>
 			{pick && (
 				<>
-					<Text style={styles.heading} role="heading">
+					<Text style={[styles.heading, { color: c.text }]} role="heading">
 						Pick a country from {pick.continent}
 					</Text>
 					{pick.options.map((country) => (
 						<Link key={country.code} href={`/country/${country.code.toLowerCase()}`} asChild>
-							<Pressable style={styles.card}>
-								<Text style={styles.country}>{country.name}</Text>
+							<Pressable
+								style={StyleSheet.flatten([
+									styles.card,
+									{ borderColor: c.border, backgroundColor: c.surface }
+								])}
+							>
+								<Text style={[styles.country, { color: c.text }]}>{country.name}</Text>
 							</Pressable>
 						</Link>
 					))}
@@ -45,11 +53,10 @@ const styles = StyleSheet.create({
 	button: {
 		alignItems: 'center',
 		paddingVertical: 16,
-		borderRadius: 999,
-		backgroundColor: colors.teal
+		borderRadius: 999
 	},
-	buttonText: { color: '#fff', fontSize: 18, fontWeight: '700' },
+	buttonText: { fontSize: 18, fontWeight: '700' },
 	heading: { marginTop: 12, fontSize: 20, fontWeight: '700' },
-	card: { padding: 16, borderWidth: 1, borderColor: colors.border, borderRadius: 8 },
+	card: { padding: 16, borderWidth: 1, borderRadius: 8 },
 	country: { fontSize: 18, fontWeight: '600' }
 });

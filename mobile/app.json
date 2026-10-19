@@ -9,12 +9,12 @@
 			"policy": "fingerprint"
 		},
 		"orientation": "portrait",
-		"userInterfaceStyle": "light",
+		"userInterfaceStyle": "automatic",
 		"platforms": ["android"],
 		"android": {
 			"package": "com.recipeRoulette.app"
 		},
-		"plugins": ["expo-router", "expo-status-bar"],
+		"plugins": ["expo-router", "expo-status-bar", "expo-system-ui"],
 		"updates": {
 			"url": "https://u.expo.dev/6440ede6-79cb-42fe-8106-df80f3f9cee1"
 		},

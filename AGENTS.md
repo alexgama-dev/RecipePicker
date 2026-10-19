@@ -23,6 +23,7 @@ SvelteKit + Svelte 5 (runes only) + TypeScript. Package manager: pnpm.
 - Features live in `mobile/src/features/<feature>/`; screens in `mobile/app/` stay thin.
 - Shared data and logic go in `packages/food-data`, not copied into the app.
 - The `as const` rule for states applies here too.
+- Colours come from `useColors()` in `src/theme.ts`; no hardcoded colours in components.
 - Tests are `*.test.tsx` next to the component (jest-expo + React Native Testing Library).
 - Merges to `main` that touch the app run `mobile/.eas/workflows/release.yml`: an OTA update for JS-only changes, a new APK when native parts change (Expo emails the install link).
 
