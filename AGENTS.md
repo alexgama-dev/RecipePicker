@@ -36,6 +36,7 @@ SvelteKit + Svelte 5 (runes only) + TypeScript. Package manager: pnpm.
 - Every dish links out to a recipe search. Linking to other sites is fine; copying from them isn't.
 - Flag anything uncertain (technique, authenticity, food safety) in the PR description.
 - No recipe APIs or user-submitted recipes without a ticket deciding it first.
+- Dish photos: only CC0, CC BY, CC BY-SA, Unsplash or Pexels licences — no NC/ND. Record credit, licence and source URL on the dish and show the credit with the photo. A human confirms each photo shows the dish.
 
 ## Workflow
 

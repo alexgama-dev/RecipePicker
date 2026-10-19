@@ -1,5 +1,5 @@
 import { render, screen, userEvent } from '@testing-library/react-native';
-import { countries } from '@recipe-roulette/food-data';
+import { countries, countryLabel } from '@recipe-roulette/food-data';
 import { CountrySpin } from './CountrySpin';
 
 it('shows three countries from the picked continent', async () => {
@@ -8,7 +8,9 @@ it('shows three countries from the picked continent', async () => {
 
 	const heading = screen.getByRole('heading', { name: /^Pick a country from / });
 	const continent = countries.find((c) => heading.props.children.includes(c.continent))?.continent;
-	const shown = countries.filter((c) => c.continent === continent && screen.queryByText(c.name));
+	const shown = countries.filter(
+		(c) => c.continent === continent && screen.queryByText(countryLabel(c))
+	);
 	expect(shown).toHaveLength(3);
 	expect(screen.getByRole('button', { name: 'Spin again' })).toBeOnTheScreen();
 });

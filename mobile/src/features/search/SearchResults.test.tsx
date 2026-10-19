@@ -1,6 +1,6 @@
 import { render, screen, userEvent } from '@testing-library/react-native';
 import { renderRouter } from 'expo-router/testing-library';
-import { countries } from '@recipe-roulette/food-data';
+import { countries, countryLabel } from '@recipe-roulette/food-data';
 import { SearchResults } from './SearchResults';
 
 const country = countries[0];
@@ -9,7 +9,7 @@ const dish = country.dishes[0];
 it('shows countries matching the query', async () => {
 	await render(<SearchResults query={country.name} />);
 	expect(screen.getByRole('heading', { name: 'Countries' })).toBeOnTheScreen();
-	expect(screen.getByText(country.name)).toBeOnTheScreen();
+	expect(screen.getByText(countryLabel(country))).toBeOnTheScreen();
 });
 
 it('shows dishes matching the query', async () => {
