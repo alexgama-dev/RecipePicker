@@ -27,6 +27,16 @@ SvelteKit + Svelte 5 (runes only) + TypeScript. Package manager: pnpm.
 - Tests are `*.test.tsx` next to the component (jest-expo + React Native Testing Library).
 - Merges to `main` that touch the app run `mobile/.eas/workflows/release.yml`: an OTA update for JS-only changes, a new APK when native parts change (Expo emails the install link).
 
+## Content (dishes and recipes)
+
+- Dishes and our own recipes are written by us: Claude drafts them, a human reviews them in the PR. They live in `packages/food-data`.
+- Write every description and step in our own words. Don't copy or lightly reword recipes from sites, books or APIs.
+- Amounts in metric with US in brackets on the same line, e.g. "200 g (7 oz)"; amounts that read the same everywhere stay as one ("2 eggs").
+- Claude-drafted recipes are `aiDrafted: true, tested: false`. Set `tested: true` only when someone has cooked it and says it works.
+- Every dish links out to a recipe search. Linking to other sites is fine; copying from them isn't.
+- Flag anything uncertain (technique, authenticity, food safety) in the PR description.
+- No recipe APIs or user-submitted recipes without a ticket deciding it first.
+
 ## Workflow
 
 - Work is tracked in Linear (team `FOOD`). One branch per issue, named with Linear's branch name (e.g. `alex/food-12-envelope-animation`), or `claude/food-12-<slug>` for work done by the ticket-flow routine.
