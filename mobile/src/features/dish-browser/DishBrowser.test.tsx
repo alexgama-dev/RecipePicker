@@ -15,7 +15,7 @@ it('lists dishes under their continent', async () => {
 });
 
 it("opens a dish's screen", async () => {
-	const router = await renderRouter({ index: DishBrowser, 'dish/[slug]': () => null });
+	const router = await renderRouter({ index: () => <DishBrowser />, 'dish/[slug]': () => null });
 	await userEvent.press(screen.getByText(dish.name));
 	expect(router.getPathname()).toBe(`/dish/${dish.slug}`);
 });

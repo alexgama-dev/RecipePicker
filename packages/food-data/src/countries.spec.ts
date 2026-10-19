@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { continents, countries, findCountry, findDish, pickCountries } from './countries';
+import {
+	continents,
+	countries,
+	findCountry,
+	findDish,
+	pickCountries,
+	pickDishes
+} from './countries';
 
 describe('countries data', () => {
 	it.each(continents)('%s has enough countries for a hand of 3', (continent) => {
@@ -41,5 +48,12 @@ describe('pickCountries', () => {
 		const picked = pickCountries(continent, 3);
 		expect(new Set(picked.map((country) => country.code)).size).toBe(3);
 		expect(picked.every((country) => country.continent === continent)).toBe(true);
+	});
+});
+
+describe('pickDishes', () => {
+	it('picks 3 different dishes', () => {
+		const slugs = pickDishes(3).map(({ dish }) => dish.slug);
+		expect(new Set(slugs).size).toBe(3);
 	});
 });
