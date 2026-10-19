@@ -1,5 +1,5 @@
-import { DishBrowser } from '@/features/dish-browser/DishBrowser';
+import { Home } from '@/features/home/Home';
 
 export default function HomeScreen() {
-	return <DishBrowser />;
+	return <Home />;
 }

@@ -437,6 +437,10 @@ export const countries: Country[] = [
 	}
 ];
 
+export const dishes = countries.flatMap((country) =>
+	country.dishes.map((dish) => ({ dish, country }))
+);
+
 export function findCountry(code: string): Country | undefined {
 	return countries.find((country) => country.code === code.toUpperCase());
 }
@@ -454,4 +458,8 @@ export function pickContinent(): Continent {
 
 export function pickCountries(continent: Continent, count: number): Country[] {
 	return shuffle(countries.filter((country) => country.continent === continent)).slice(0, count);
+}
+
+export function pickDishes(count: number): { dish: Dish; country: Country }[] {
+	return shuffle(dishes).slice(0, count);
 }

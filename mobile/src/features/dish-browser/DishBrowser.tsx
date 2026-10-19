@@ -1,6 +1,7 @@
-import { Link } from 'expo-router';
-import { Pressable, SectionList, StyleSheet, Text } from 'react-native';
+import type { ReactElement } from 'react';
+import { SectionList, StyleSheet, Text } from 'react-native';
 import { continents, countries } from '@recipe-roulette/food-data';
+import { DishCard } from '@/features/dish/DishCard';
 import { useColors } from '@/theme';
 
 const sections = continents.map((continent) => ({
@@ -10,7 +11,7 @@ const sections = continents.map((continent) => ({
 		.flatMap((country) => country.dishes.map((dish) => ({ dish, country })))
 }));
 
-export function DishBrowser() {
+export function DishBrowser({ header }: { header?: ReactElement }) {
 	const c = useColors();
 
 	return (
@@ -18,6 +19,7 @@ export function DishBrowser() {
 			sections={sections}
 			keyExtractor={({ dish }) => dish.slug}
 			contentContainerStyle={styles.list}
+			ListHeaderComponent={header}
 			renderSectionHeader={({ section }) => (
 				<Text
 					style={[styles.heading, { color: c.text, backgroundColor: c.background }]}
@@ -26,20 +28,7 @@ export function DishBrowser() {
 					{section.title}
 				</Text>
 			)}
-			renderItem={({ item: { dish, country } }) => (
-				<Link href={`/dish/${dish.slug}`} asChild>
-					<Pressable
-						style={StyleSheet.flatten([
-							styles.card,
-							{ borderColor: c.border, backgroundColor: c.surface }
-						])}
-					>
-						<Text style={[styles.dish, { color: c.text }]}>{dish.name}</Text>
-						<Text style={[styles.country, { color: c.teal }]}>{country.name}</Text>
-						<Text style={{ color: c.text }}>{dish.description}</Text>
-					</Pressable>
-				</Link>
-			)}
+			renderItem={({ item }) => <DishCard {...item} />}
 		/>
 	);
 }
@@ -51,13 +40,5 @@ const styles = StyleSheet.create({
 		marginBottom: 8,
 		fontSize: 22,
 		fontWeight: '700'
-	},
-	card: {
-		marginBottom: 12,
-		padding: 16,
-		borderWidth: 1,
-		borderRadius: 8
-	},
-	dish: { fontSize: 18, fontWeight: '600' },
-	country: { marginBottom: 4 }
+	}
 });

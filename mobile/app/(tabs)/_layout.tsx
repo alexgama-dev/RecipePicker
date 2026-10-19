@@ -2,7 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
 import { useColors } from '@/theme';
 
-function tabIcon(name: 'home' | 'search' | 'shuffle') {
+function tabIcon(name: 'home' | 'shuffle') {
 	return function TabIcon({ size, focused }: { size: number; focused: boolean }) {
 		const c = useColors();
 		return (
@@ -21,7 +21,6 @@ export default function TabsLayout() {
 	return (
 		<Tabs screenOptions={{ tabBarActiveTintColor: c.teal, tabBarInactiveTintColor: c.muted }}>
 			<Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: tabIcon('home') }} />
-			<Tabs.Screen name="search" options={{ title: 'Search', tabBarIcon: tabIcon('search') }} />
 			<Tabs.Screen name="spin" options={{ title: 'Spin', tabBarIcon: tabIcon('shuffle') }} />
 		</Tabs>
 	);
