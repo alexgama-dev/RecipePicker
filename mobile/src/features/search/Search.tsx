@@ -4,7 +4,7 @@ import { Pressable, SectionList, StyleSheet, Text, TextInput, View } from 'react
 import { searchCountries, searchDishes } from '@recipe-roulette/food-data';
 import { useColors } from '@/theme';
 
-export function CountrySearch() {
+export function Search() {
 	const c = useColors();
 	const [query, setQuery] = useState('');
 	const sections = [

@@ -1,5 +1,5 @@
-import { CountrySearch } from '@/features/country-search/CountrySearch';
+import { Search } from '@/features/search/Search';
 
 export default function SearchScreen() {
-	return <CountrySearch />;
+	return <Search />;
 }
