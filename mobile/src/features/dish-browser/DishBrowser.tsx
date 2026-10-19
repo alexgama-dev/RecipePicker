@@ -16,7 +16,7 @@ export function DishBrowser() {
 	return (
 		<SectionList
 			sections={sections}
-			keyExtractor={({ dish, country }) => `${country.code}-${dish.name}`}
+			keyExtractor={({ dish }) => dish.slug}
 			contentContainerStyle={styles.list}
 			renderSectionHeader={({ section }) => (
 				<Text
@@ -27,7 +27,7 @@ export function DishBrowser() {
 				</Text>
 			)}
 			renderItem={({ item: { dish, country } }) => (
-				<Link href={`/country/${country.code.toLowerCase()}`} asChild>
+				<Link href={`/dish/${dish.slug}`} asChild>
 					<Pressable
 						style={StyleSheet.flatten([
 							styles.card,

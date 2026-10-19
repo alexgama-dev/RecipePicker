@@ -1,11 +1,28 @@
 import { describe, expect, it } from 'vitest';
-import { continents, countries, findCountry, pickCountries } from './countries';
+import { continents, countries, findCountry, findDish, pickCountries } from './countries';
 
 describe('countries data', () => {
 	it.each(continents)('%s has enough countries for a hand of 3', (continent) => {
 		expect(
 			countries.filter((country) => country.continent === continent).length
 		).toBeGreaterThanOrEqual(3);
+	});
+
+	it('gives every dish a unique slug', () => {
+		const slugs = countries.flatMap((country) => country.dishes.map((dish) => dish.slug));
+		expect(new Set(slugs).size).toBe(slugs.length);
+	});
+});
+
+describe('findDish', () => {
+	it('finds a dish and its country by slug', () => {
+		const country = countries[0];
+		const dish = country.dishes[0];
+		expect(findDish(dish.slug)).toEqual({ dish, country });
+	});
+
+	it('returns undefined for an unknown slug', () => {
+		expect(findDish('nope')).toBeUndefined();
 	});
 });
 
