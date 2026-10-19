@@ -24,6 +24,7 @@ export default function RootLayout() {
 			<Stack>
 				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 				<Stack.Screen name="country/[code]" />
+				<Stack.Screen name="dish/[slug]" />
 			</Stack>
 		</ThemeProvider>
 	);

@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react-native';
+import { render, screen, userEvent } from '@testing-library/react-native';
+import { renderRouter } from 'expo-router/testing-library';
 import { continents, countries } from '@recipe-roulette/food-data';
 import { DishBrowser } from './DishBrowser';
 
@@ -11,4 +12,10 @@ it('lists dishes under their continent', async () => {
 	await render(<DishBrowser />);
 	expect(screen.getByRole('heading', { name: continent })).toBeOnTheScreen();
 	expect(screen.getByText(dish.name)).toBeOnTheScreen();
+});
+
+it("opens a dish's screen", async () => {
+	const router = await renderRouter({ index: DishBrowser, 'dish/[slug]': () => null });
+	await userEvent.press(screen.getByText(dish.name));
+	expect(router.getPathname()).toBe(`/dish/${dish.slug}`);
 });

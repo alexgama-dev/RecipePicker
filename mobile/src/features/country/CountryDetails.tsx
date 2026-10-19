@@ -1,4 +1,5 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { Link } from 'expo-router';
+import { FlatList, Pressable, StyleSheet, Text } from 'react-native';
 import type { Country } from '@recipe-roulette/food-data';
 import { useColors } from '@/theme';
 
@@ -8,13 +9,20 @@ export function CountryDetails({ country }: { country: Country }) {
 	return (
 		<FlatList
 			data={country.dishes}
-			keyExtractor={(dish) => dish.name}
+			keyExtractor={(dish) => dish.slug}
 			contentContainerStyle={styles.list}
 			renderItem={({ item: dish }) => (
-				<View style={[styles.card, { borderColor: c.border, backgroundColor: c.surface }]}>
-					<Text style={[styles.dish, { color: c.text }]}>{dish.name}</Text>
-					<Text style={{ color: c.text }}>{dish.description}</Text>
-				</View>
+				<Link href={`/dish/${dish.slug}`} asChild>
+					<Pressable
+						style={StyleSheet.flatten([
+							styles.card,
+							{ borderColor: c.border, backgroundColor: c.surface }
+						])}
+					>
+						<Text style={[styles.dish, { color: c.text }]}>{dish.name}</Text>
+						<Text style={{ color: c.text }}>{dish.description}</Text>
+					</Pressable>
+				</Link>
 			)}
 		/>
 	);
