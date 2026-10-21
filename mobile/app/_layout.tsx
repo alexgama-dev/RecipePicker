@@ -1,6 +1,7 @@
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'react-native';
+import { UpdateBanner } from '@/features/app-updates/UpdateBanner';
 import { useColors } from '@/theme';
 
 export default function RootLayout() {
@@ -26,6 +27,7 @@ export default function RootLayout() {
 				<Stack.Screen name="country/[code]" />
 				<Stack.Screen name="dish/[slug]" />
 			</Stack>
+			<UpdateBanner />
 		</ThemeProvider>
 	);
 }
